@@ -1,22 +1,21 @@
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { StatusBar } from "react-native";
+import {NavigationContainer} from "@react-navigation/native";
+import {SafeAreaProvider} from "react-native-safe-area-context";
+import {StatusBar} from "react-native";
 
-import { ThemeProvider } from "./src/context/ThemeProvider";
-import AppNavigator from "./src/navigation/StackNavigator";
+import {ThemeProvider} from "@/context/ThemeProvider";
+import AppNavigator from "@/navigation/StackNavigator";
 
 const App = () => {
-  return (
-    <SafeAreaProvider>
-      <StatusBar hidden={false} />
-      <ThemeProvider>
-        <NavigationContainer>
-          <AppNavigator />
-        </NavigationContainer>
-      </ThemeProvider>
-    </SafeAreaProvider>
-  );
+    return (
+        <SafeAreaProvider>
+            <StatusBar hidden={false}/>
+            <ThemeProvider>
+                <NavigationContainer>
+                    <AppNavigator/>
+                </NavigationContainer>
+            </ThemeProvider>
+        </SafeAreaProvider>
+    );
 };
 
 export default App;

@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface ArchitecturalRepository extends JpaRepository<Architectural, Long> {
-  List<Architectural> findAllByBuildingId(Long id);
-  //List findByBuildingId(Long buildingId);
+    List<Architectural> findAllByBuildingId(Long id);
+    //List findByBuildingId(Long buildingId);
 }

@@ -9,10 +9,11 @@ import java.util.Optional;
 
 @Repository
 public interface BuildingRepository extends JpaRepository<Building, Long> {
-  List<Building> findAllByCityId(Long id);
-  Optional<Building> findByName(String name);
+    List<Building> findAllByCityId(Long id);
 
-  Building findBuildingByName(String name);
+    Optional<Building> findByName(String name);
+
+    Building findBuildingByName(String name);
 
 }
 

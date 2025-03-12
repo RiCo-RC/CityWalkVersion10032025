@@ -8,8 +8,7 @@ const CustomButton = ({
                           style,
                           withBackground = true,
                           withBorder = true,
-                          onPress = () => {
-                          },
+                          onPress = () => {},
                           disabled = false,
                       }) => {
     const {theme} = useTheme();

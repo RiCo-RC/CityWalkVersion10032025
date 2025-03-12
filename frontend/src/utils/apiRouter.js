@@ -45,7 +45,7 @@ export const fetchCityCoordinates = async (cityName) => {
     }
 };
 
-//---- UTILISATEURS ----\\
+//---- UTILISATEURS ---- \\
 
 export const getAllUsers = async () => {
     try {

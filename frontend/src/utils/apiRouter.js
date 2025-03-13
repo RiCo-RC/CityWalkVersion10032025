@@ -20,19 +20,22 @@ export const fetchCityCoordinates = async (cityName) => {
 
         if (data && data.results.length > 0) {
             const cityData = data.results[0];
-            const {components, geometry} = cityData;
-            const {city, country} = components;
-            const {lat, lng} = geometry;
+            const latitude = cityData.geometry.lat;
+            const longitude = cityData.geometry.lng;
+
+            const city = cityData.components.town || cityData.components.city || cityData.components.village;
+            const country = cityData.components.country
+            console.log(`Pays: ${country}, Ville: ${city}, Latitude: ${latitude}, Longitude: ${longitude}`);
 
             // Vérification que la latitude et la longitude sont valides
-            if (lat && lng) {
-                const cityNameToSave = city || cityName;
+            if (latitude && longitude && city && country) {
+                const cityNameToSave = city;
                 const countryNameToSave = country || '';
                 return {
                     name: cityNameToSave,
                     country: countryNameToSave,
-                    latitude: lat,
-                    longitude: lng,
+                    latitude: latitude,
+                    longitude: longitude,
                 };
             } else {
                 throw new Error('Coordinates are invalid');

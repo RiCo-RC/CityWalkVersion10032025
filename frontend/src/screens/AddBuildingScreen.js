@@ -37,7 +37,7 @@ const AddBuildingScreen = ({navigation}) => {
         setLoading(true);
         try {
             let city = await getOneCityByName(cityName);
-            console.log("city2", city);
+            console.log("city", city);
             if (!city.city) {
                 const cityData = await fetchCityCoordinates(cityName);
                 city = await createCity({

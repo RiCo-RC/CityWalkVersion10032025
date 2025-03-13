@@ -22,13 +22,6 @@ const MapScreen = ({navigation}) => {
     const [isLoading, setIsLoading] = useState(false);
     const [initialRegion, setInitialRegion] = useState(null);
 
-    // const [initialRegion, setInitialRegion] = useState({
-    //   latitude: 47.9961,
-    //   longitude: 7.8534,
-    //   latitudeDelta: 0.015,
-    //   longitudeDelta: 0.015,
-    // });
-
     // Fonction pour récupérer la ville
     useEffect(() => {
         const fetchCity = async () => {
@@ -100,20 +93,26 @@ const MapScreen = ({navigation}) => {
     // Fonction de recherche de ville avec vérification dans la base de données
     const handleSearch = useCallback(async () => {
         if (!searchQuery.trim()) return;
+        console.log("searchQuery", searchQuery);
         setIsLoading(true);
         try {
             // Recherche de la ville dans la base de données
             const cityFromDb = await getOneCityByName(searchQuery);
             setSearchQuery('');
 
+            console.log("cityFromDb", cityFromDb)
+
             if (cityFromDb.message === 'Request was successful' && cityFromDb.city) {
+                console.log("cityFromDb - handleCityFound");
                 // Ville trouvée dans la base de données
                 await handleCityFound(cityFromDb);
             } else {
-                // Ville non trouvée dans la base de données - appel à OpenCage
+                // Ville non trouvée dans la base de données — appel à OpenCage
                 const cityData = await fetchCityCoordinates(searchQuery);
-
+                console.log("cityData", cityData);
                 if (cityData) {
+                    console.log("cityData avant createCity:", cityData);
+                    console.log(`Latitude: ${cityData.latitude}, Longitude: ${cityData.longitude}`);
                     // Sauvegarder la ville dans la base de données
                     const createResponse = await createCity({
                         name: cityData.name,
@@ -121,14 +120,17 @@ const MapScreen = ({navigation}) => {
                         longitude: cityData.longitude,
                     });
 
+                    console.log("createResponse", createResponse);
+                    console.log("createResponse.city", createResponse.city);
+
                     if (createResponse.city) {
                         // Ville créée et sauvegardée dans la base de données
-                        await handleCityFound(createResponse.city);
+                        await handleCityFound(createResponse);
                     }
                 }
             }
         } catch (error) {
-            console.log('Erreur', error.message);
+            console.log('Erreur >>', error.message);
         } finally {
             setIsLoading(false);
         }
@@ -136,28 +138,32 @@ const MapScreen = ({navigation}) => {
 
     // Fonction pour gérer la ville trouvée (mise à jour de la carte et du stockage)
     const handleCityFound = async (cityData) => {
-        if (cityData.city.latitude && cityData.city.longitude) {
-            setCity(cityData.city);
-            await AsyncStorage.setItem('city', JSON.stringify(cityData.city));
+    console.log("handleCityFound - cityData", cityData);
+    console.log("handleCityFound - cityData.city", cityData.city);
+    console.log("handleCityFound - cityData.city.latitude", cityData.city.latitude);
+    console.log("handleCityFound - cityData.city.longitude", cityData.city.longitude);
+    if (cityData.city.latitude && cityData.city.longitude) {
+      setCity(cityData.city);
+      await AsyncStorage.setItem('city', JSON.stringify(cityData.city));
 
-            setInitialRegion({
-                latitude: cityData.city.latitude,
-                longitude: cityData.city.longitude,
-                latitudeDelta: 0.05,
-                longitudeDelta: 0.05,
-            });
+      setInitialRegion({
+        latitude: cityData.city.latitude,
+        longitude: cityData.city.longitude,
+        latitudeDelta: 0.05,
+        longitudeDelta: 0.05,
+      });
 
-            mapRef.current?.animateToRegion(
-                {
-                    latitude: cityData.city.latitude,
-                    longitude: cityData.city.longitude,
-                    latitudeDelta: 0.05,
-                    longitudeDelta: 0.05,
-                },
-                1000
-            );
-        }
-    };
+      mapRef.current?.animateToRegion(
+        {
+          latitude: cityData.city.latitude,
+          longitude: cityData.city.longitude,
+          latitudeDelta: 0.05,
+          longitudeDelta: 0.05,
+        },
+        1000
+      );
+    }
+  };
 
     // Récupération du background selon le thème
     const getViewBackgroundColorStyle =

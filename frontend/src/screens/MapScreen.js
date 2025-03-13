@@ -10,7 +10,7 @@ import {height, width} from '@/utils/variables';
 
 import {CustomButtonText, CustomText, Header} from '@/components';
 
-import {createCity, fetchCityCoordinates, getBuildingsByCityId, getOneCityById, getOneCityByName,} from '@/utils';
+import {createCity, fetchCityCoordinates, getBuildingsByCityId, getOneCityById, getOneCityByName} from '@/utils';
 
 const MapScreen = ({navigation}) => {
     const {theme} = useTheme();
@@ -138,32 +138,32 @@ const MapScreen = ({navigation}) => {
 
     // Fonction pour gérer la ville trouvée (mise à jour de la carte et du stockage)
     const handleCityFound = async (cityData) => {
-    console.log("handleCityFound - cityData", cityData);
-    console.log("handleCityFound - cityData.city", cityData.city);
-    console.log("handleCityFound - cityData.city.latitude", cityData.city.latitude);
-    console.log("handleCityFound - cityData.city.longitude", cityData.city.longitude);
-    if (cityData.city.latitude && cityData.city.longitude) {
-      setCity(cityData.city);
-      await AsyncStorage.setItem('city', JSON.stringify(cityData.city));
+        console.log("handleCityFound - cityData", cityData);
+        console.log("handleCityFound - cityData.city", cityData.city);
+        console.log("handleCityFound - cityData.city.latitude", cityData.city.latitude);
+        console.log("handleCityFound - cityData.city.longitude", cityData.city.longitude);
+        if (cityData.city.latitude && cityData.city.longitude) {
+            setCity(cityData.city);
+            await AsyncStorage.setItem('city', JSON.stringify(cityData.city));
 
-      setInitialRegion({
-        latitude: cityData.city.latitude,
-        longitude: cityData.city.longitude,
-        latitudeDelta: 0.05,
-        longitudeDelta: 0.05,
-      });
+            setInitialRegion({
+                latitude: cityData.city.latitude,
+                longitude: cityData.city.longitude,
+                latitudeDelta: 0.05,
+                longitudeDelta: 0.05,
+            });
 
-      mapRef.current?.animateToRegion(
-        {
-          latitude: cityData.city.latitude,
-          longitude: cityData.city.longitude,
-          latitudeDelta: 0.05,
-          longitudeDelta: 0.05,
-        },
-        1000
-      );
-    }
-  };
+            mapRef.current?.animateToRegion(
+                {
+                    latitude: cityData.city.latitude,
+                    longitude: cityData.city.longitude,
+                    latitudeDelta: 0.05,
+                    longitudeDelta: 0.05,
+                },
+                1000
+            );
+        }
+    };
 
     // Récupération du background selon le thème
     const getViewBackgroundColorStyle =

@@ -24,7 +24,8 @@ export {
     updateBuilding,
     deleteBuilding,
     getBuildingById,
-    getBuildingsByCityId
+    getBuildingsByCityId,
+    fetchCityCoordinates
 } from "./apiRouter";
 export {checkAuthentification} from "./authentification";
 export {loadTheme, saveTheme} from "./theme";

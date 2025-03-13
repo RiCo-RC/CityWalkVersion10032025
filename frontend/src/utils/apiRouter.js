@@ -8,7 +8,7 @@ const BASE_URL = 'https://api.opencagedata.com/geocode/v1/json';
 export const fetchCityCoordinates = async (cityName) => {
     try {
         const url = `${BASE_URL}?q=${encodeURIComponent(cityName)}&key=${API_KEY_MAP}&language=fr`;
-        return await fetch(url);
+        const response =  await fetch(url);
 
         if (!response.ok) {
             throw new Error('Erreur de réponse de l\'API OpenCage');

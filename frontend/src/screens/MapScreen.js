@@ -10,7 +10,13 @@ import {height, width} from '@/utils/variables';
 
 import {CustomButtonText, CustomText, Header} from '@/components';
 
-import {createCity, fetchCityCoordinates, getBuildingsByCityId, getOneCityById, getOneCityByName} from '@/utils';
+import {
+    createCity,
+    fetchCityCoordinates,
+    getBuildingsByCityId,
+    getOneCityById,
+    getOneCityByName
+} from '@/utils';
 
 const MapScreen = ({navigation}) => {
     const {theme} = useTheme();

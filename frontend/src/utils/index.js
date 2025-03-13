@@ -17,6 +17,7 @@ export {
     deleteCity,
     getOneCityById,
     getOneCityByName,
+    fetchCityCoordinates,
 
     /**Batiments**/
         getAllBuildings,
@@ -25,7 +26,6 @@ export {
     deleteBuilding,
     getBuildingById,
     getBuildingsByCityId,
-    fetchCityCoordinates
 } from "./apiRouter";
 export {checkAuthentification} from "./authentification";
 export {loadTheme, saveTheme} from "./theme";

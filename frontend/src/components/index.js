@@ -8,3 +8,4 @@ export {default as CustomText} from './CustomText';
 export {default as Header} from './Header';
 export {default as ProgressBar} from './ProgressBar';
 export {default as SettingsModal} from './SettingsModal';
+export {default as CustomView} from './CustomView';

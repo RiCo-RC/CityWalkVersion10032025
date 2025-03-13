@@ -17,6 +17,7 @@ import {
     getOneCityById,
     getOneCityByName
 } from '@/utils';
+import {CustomView} from "../components";
 
 const MapScreen = ({navigation}) => {
     const {theme} = useTheme();
@@ -221,14 +222,14 @@ const MapScreen = ({navigation}) => {
 
                             {/* Détails du bâtiment sélectionné */}
                             {selectedPlace && (
-                                <View style={styles.selectedPlaceContainer}>
+                                <CustomView style={styles.selectedPlaceContainer}>
                                     <CustomText style={styles.selectedPlaceTitle}>
                                         {selectedPlace.name}
                                     </CustomText>
                                     <CustomText style={styles.selectedPlaceDescription}>
                                         {selectedPlace.description}
                                     </CustomText>
-                                </View>
+                                </CustomView>
                             )}
                         </View>
                         <View style={styles.containerButtons}>
@@ -326,7 +327,6 @@ const styles = StyleSheet.create({
         bottom: 20,
         left: 20,
         right: 20,
-        backgroundColor: 'rgba(255, 255, 255, 0.9)',
         borderRadius: 12,
         padding: 16,
         elevation: 4,
@@ -338,7 +338,7 @@ const styles = StyleSheet.create({
     selectedPlaceDescription: {
         marginTop: 5,
         fontSize: 14,
-        color: '#555',
+
     },
     map: {
         flex: 1,
